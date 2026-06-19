@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f5efe2;
+  --paper: #fff9ec;
+  --green: #39431d;
+  --green-soft: #667047;
+  --gold: #b98b39;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Great Vibes", "Edwardian Script ITC", "Brush Script MT",
+    cursive;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 34rem),
+    linear-gradient(180deg, #faf5e9 0%, #efe4cf 46%, #dac7a6 100%);
+  color: var(--green);
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.paper-shadow {
+  filter: drop-shadow(0 30px 38px rgba(47, 37, 18, 0.22));
+}
+
+.soft-shadow {
+  filter: drop-shadow(0 20px 26px rgba(47, 37, 18, 0.18));
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(57, 67, 29, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 67, 29, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.floating {
+  animation: floating 5s ease-in-out infinite;
+}
+
+.slow-spin {
+  animation: slow-spin 24s linear infinite;
+}
+
+.open-envelope {
+  animation: open-envelope 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.invite-rise {
+  animation: invite-rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
+}
+
+.fade-up {
+  animation: fade-up 850ms ease both;
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.36) 50%,
+    transparent 58%
+  );
+  transform: translateX(-70%);
+  animation: shine 3.8s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(var(--rotate, 0deg));
+  }
+}
+
+@keyframes slow-spin {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(352deg);
+  }
+}
+
+@keyframes open-envelope {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes invite-rise {
+  from {
+    opacity: 0;
+    transform: translateY(70px) scale(0.82) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0%,
+  42% {
+    transform: translateX(-70%);
+  }
+  78%,
+  100% {
+    transform: translateX(70%);
+  }
+}
