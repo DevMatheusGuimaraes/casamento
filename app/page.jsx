@@ -122,15 +122,15 @@ export default function Home() {
 
         
           <Image
-            src="/convite/polaroid2.png"
+            src="/convite/polaroid4.png"
             alt="Você é  nosso convidado:Jéssica e Caio Augusto"
             width={1120}
             height={1456}
             priority
-            className="open-envelope paper-shadow absolute top-[270%] left-[42%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] "
+            className="open-envelope paper-shadow absolute top-[180%] left-[45%] w-[60%] max-w-[430px] sm:top-[4%] scale-[1.1] "
           />
 
-          <a href="https://maps.app.goo.gl/ENMKuHMBV8oW7rmx9">
+          <a href="https://maps.app.goo.gl/MptEDjiM3UGY16Nz5">
             <Image
               src={imagens.local}
               alt="Você é  nosso convidado:Jéssica e Caio Augusto"
@@ -147,17 +147,19 @@ export default function Home() {
             width={1120}
             height={1456}
             priority
-            className="open-envelope paper-shadow absolute top-[180%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] left-[40%]"
+            className="open-envelope paper-shadow absolute top-[270%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] left-[40%]"
           />
 
-          <Image
-            src="/convite/confirmar.png"
-            alt="Você é  nosso convidado:Jéssica e Caio Augusto"
-            width={1120}
-            height={1456}
-            priority
-            className="open-envelope paper-shadow absolute top-[145%] w-[68%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1] z-99"
-          />
+          <a href="https://wa.me/5569993906707?text=Ol%C3%A1%2C%20gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20para%20o%20casamento%20de%20J%C3%A9ssica%20%26%20Caio%20Augusto%20que%20acontecer%C3%A1%20dia%2015%20de%20agosto.">
+            <Image
+              src="/convite/confirmar.png"
+              alt="Você é  nosso convidado:Jéssica e Caio Augusto"
+              width={1120}
+              height={1456}
+              priority
+              className="open-envelope paper-shadow absolute top-[145%] w-[60%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1] z-99"
+            />
+          </a>
 
 
         </div>
