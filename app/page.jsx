@@ -90,7 +90,7 @@ export default function Home() {
 
       {aberto && (
 
-      <section className="min-h-[1150px]">
+      <section className="min-h-[1250px]">
 
         <div className="relative grid w-full">
           <Image
@@ -162,7 +162,7 @@ export default function Home() {
 
         </div>
 
-      <footer className="relative mt-[900px] overflow-hidden border-t border-[#d8c9a3]/60 bg-gradient-to-b from-[#f8f3e8] via-[#efe5cf] to-[#d9c79e] px-6 py-14 text-center">
+      <footer className="relative mt-[1000px] overflow-hidden border-t border-[#d8c9a3]/60 bg-gradient-to-b from-[#f8f3e8] via-[#efe5cf] to-[#d9c79e] px-6 py-14 text-center">
         <div className="absolute left-1/2 top-0 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c8a96a]/30 blur-3xl" />
 
         <div className="absolute -left-16 bottom-0 h-40 w-40 rounded-full bg-[#b9bd8b]/30 blur-3xl" />
