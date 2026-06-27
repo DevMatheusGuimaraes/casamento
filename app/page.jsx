@@ -16,7 +16,7 @@ const imagens = {
   carta: "/convite/carta.png",
   aberto: "/convite/aberto.png",
   convidado: "/convite/convidado.png",
-  detalhes: "/convite/detalhes.png",
+  detalhes: "/convite/confirmar.png",
   presentes: "/convite/presentes.png",
   local: "/convite/local.png",
   jipa: "/convite/jipa.png",
@@ -111,14 +111,35 @@ export default function Home() {
             priority
           />
 
+        <Image
+          src="/convite/polaroid1.png"
+          alt="Você é  nosso convidado:Jéssica e Caio Augusto"
+          width={1120}
+          height={1456}
+          priority
+          className="open-envelope paper-shadow absolute top-[73%] left-[-7%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] "
+        />
+
+        
           <Image
-            src={imagens.local}
+            src="/convite/polaroid2.png"
             alt="Você é  nosso convidado:Jéssica e Caio Augusto"
             width={1120}
             height={1456}
             priority
-            className="open-envelope paper-shadow absolute top-[215%] w-[68%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1]"
+            className="open-envelope paper-shadow absolute top-[270%] left-[42%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] "
           />
+
+          <a href="https://maps.app.goo.gl/ENMKuHMBV8oW7rmx9">
+            <Image
+              src={imagens.local}
+              alt="Você é  nosso convidado:Jéssica e Caio Augusto"
+              width={1120}
+              height={1456}
+              priority
+              className="open-envelope paper-shadow absolute top-[215%] w-[68%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1]"
+            />
+          </a>
 
           <Image
             src={imagens.presentes}
@@ -130,13 +151,15 @@ export default function Home() {
           />
 
           <Image
-            src="/convite/detalhes.png"
+            src="/convite/confirmar.png"
             alt="Você é  nosso convidado:Jéssica e Caio Augusto"
             width={1120}
             height={1456}
             priority
-            className="open-envelope paper-shadow absolute top-[140%] w-[68%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1] z-99"
+            className="open-envelope paper-shadow absolute top-[145%] w-[68%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1] z-99"
           />
+
+
         </div>
 
       <footer className="relative mt-[900px] overflow-hidden border-t border-[#d8c9a3]/60 bg-gradient-to-b from-[#f8f3e8] via-[#efe5cf] to-[#d9c79e] px-6 py-14 text-center">
