@@ -14,13 +14,19 @@ const links = {
 
 const imagens = {
   carta: "/convite/carta.png",
-  aberto: "/convite/aberto.png",
+  aberto: "/convite/cartao-aberto.png",
   convidado: "/convite/convidado.png",
   detalhes: "/convite/confirmar.png",
   presentes: "/convite/presentes.png",
   local: "/convite/local.png",
   jipa: "/convite/jipa.png",
 };
+
+const whatsappText = encodeURIComponent(
+  "Olá, gostaria de confirmar minha presença para o casamento de Jéssica & Caio Augusto que acontecerá dia 15 de agosto de 2026"
+);
+
+const whatsappLink = `https://wa.me/5569993906707?text=${whatsappText}`;
 
 export default function Home() {
   const [aberto, setAberto] = useState(false);
@@ -150,14 +156,18 @@ export default function Home() {
             className="open-envelope paper-shadow absolute top-[270%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] left-[40%]"
           />
 
-          <a href="https://wa.me/5569993906707?text=Ol%C3%A1%2C%20gostaria%20de%20confirmar%20minha%20presen%C3%A7a%20para%20o%20casamento%20de%20J%C3%A9ssica%20%26%20Caio%20Augusto%20que%20acontecer%C3%A1%20dia%2015%20de%20agosto.">
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               src="/convite/confirmar.png"
-              alt="Você é  nosso convidado:Jéssica e Caio Augusto"
+              alt="Confirmar presença no casamento de Jéssica e Caio Augusto"
               width={1120}
               height={1456}
               priority
-              className="open-envelope paper-shadow absolute top-[145%] w-[60%] max-w-[430px] sm:top-[4%] rigth-[40%] scale-[1.1] z-99"
+              className="open-envelope paper-shadow absolute top-[145%] w-[60%] max-w-[430px] sm:top-[4%] right-[40%] scale-[1.1] z-[99]"
             />
           </a>
 
