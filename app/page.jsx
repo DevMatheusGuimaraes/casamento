@@ -13,13 +13,13 @@ const links = {
 };
 
 const imagens = {
-  carta: "/convite/carta.png",
-  aberto: "/convite/cartao-aberto.png",
-  convidado: "/convite/convidado.png",
-  detalhes: "/convite/confirmar.png",
-  presentes: "/convite/presentes.png",
-  local: "/convite/local-casa.png",
-  jipa: "/convite/jipa.png",
+  carta: "/convite/carta.webp",
+  aberto: "/convite/cartao-aberto.webp",
+  convidado: "/convite/convidado.webp",
+  detalhes: "/convite/confirmar.webp",
+  presentes: "/convite/presentes.webp",
+  local: "/convite/local-casa.webp",
+  jipa: "/convite/jipa.webp",
 };
 
 const whatsappText = encodeURIComponent(
@@ -118,7 +118,7 @@ export default function Home() {
           />
 
         <Image
-          src="/convite/polaroid1.png"
+          src="/convite/polaroid1.webp"
           alt="Você é  nosso convidado:Jéssica e Caio Augusto"
           width={1120}
           height={1456}
@@ -128,7 +128,7 @@ export default function Home() {
 
         
           <Image
-            src="/convite/polaroid4.png"
+            src="/convite/polaroid4.webp"
             alt="Você é  nosso convidado:Jéssica e Caio Augusto"
             width={1120}
             height={1456}
