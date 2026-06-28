@@ -18,7 +18,7 @@ const imagens = {
   convidado: "/convite/convidado.png",
   detalhes: "/convite/confirmar.png",
   presentes: "/convite/presentes.png",
-  local: "/convite/local.png",
+  local: "/convite/local-casa.png",
   jipa: "/convite/jipa.png",
 };
 
