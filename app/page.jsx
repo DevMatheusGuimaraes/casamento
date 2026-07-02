@@ -62,18 +62,18 @@ export default function Home() {
           {!aberto && (
 
             <div className="flex w-full flex-col items-center justify-center text-center">
-              <Image
+              {/* <Image
                 src="/convite/monograma2.webp"
                 alt="Monograma"
                 width={2000}
                 height={100}
                 className="mx-auto mb-[30px] h-auto w-[200px] max-w-[90vw] object-contain"
                 priority
-              />
+              /> */}
 
               <div className="flex flex-col items-center justify-center gap-5">
                 <h1
-                  className={`${brittany.className} fade-up text-center text-5xl leading-none text-[#334019] sm:text-6xl md:text-5xl mb-4`}
+                  className={`${brittany.className} fade-up text-center text-4xl leading-none text-[#334019] sm:text-6xl md:text-5xl mb-4`}
                 >
                   Jéssica & Caio Augusto
                 </h1>
