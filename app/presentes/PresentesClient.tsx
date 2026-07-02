@@ -5,6 +5,9 @@ import { useMemo, useState } from 'react'
 import { motion, type Variants } from 'framer-motion'
 import { Leaf } from 'lucide-react'
 import { gerarPixCopiaECola } from '../../lib/pix'
+import { supabase } from '../../lib/supabase'
+import { X } from 'lucide-react'
+import { AnimatePresence } from 'framer-motion'
 
 type PresenteView = {
   id: number
@@ -25,7 +28,6 @@ const pixKey = process.env.NEXT_PUBLIC_PIX_KEY || ''
 const pixReceiverName = process.env.NEXT_PUBLIC_PIX_RECEIVER_NAME || 'JESSICA E CAIO'
 const pixReceiverCity = process.env.NEXT_PUBLIC_PIX_RECEIVER_CITY || 'JI-PARANA'
 
-// Paleta centralizada — mude aqui e reflete no componente inteiro
 const cores = {
   fundo: '#f7f2e9',
   texto: '#332d29',
@@ -71,6 +73,47 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
   const [copiadoId, setCopiadoId] = useState<number | null>(null)
   const [erroPix, setErroPix] = useState<string | null>(null)
 
+  const [itemSelecionado, setItemSelecionado] = useState<PresenteView | null>(null)
+  const [nomePessoa, setNomePessoa] = useState('')
+  const [textoMensagem, setTextoMensagem] = useState('')
+  const [enviando, setEnviando] = useState(false)
+  const [erroEnvio, setErroEnvio] = useState<string | null>(null)
+  const [enviadoComSucesso, setEnviadoComSucesso] = useState(false)
+
+  async function enviarMensagem() {
+    if (!itemSelecionado) return
+    setErroEnvio(null)
+
+    if (!nomePessoa.trim()) {
+      setErroEnvio('Por favor, digite seu nome.')
+      return
+    }
+
+    setEnviando(true)
+    const { error } = await supabase.from('mensagem').insert({
+      produto: itemSelecionado.id,
+      mensagem: textoMensagem.trim() || null,
+      pessoa: nomePessoa.trim(),
+    })
+    setEnviando(false)
+
+    if (error) {
+      setErroEnvio('Não foi possível enviar. Tente novamente.')
+      return
+    }
+
+    // FIX: em vez de fechar o modal na hora (setItemSelecionado(null)),
+    // ativamos o estado de sucesso — o modal continua aberto, mas troca
+    // o formulário pela telinha de agradecimento.
+    setEnviadoComSucesso(true)
+  }
+
+  function fecharModal() {
+    setItemSelecionado(null)
+    setErroEnvio(null)
+    setEnviadoComSucesso(false)
+  }
+
   const totalCotas = useMemo(
     () => presentes.reduce((total, item) => total + item.totalCotas, 0),
     [presentes],
@@ -109,6 +152,14 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
     } catch (error) {
       setErroPix(error instanceof Error ? error.message : 'Não foi possível gerar o Pix.')
     }
+
+    // FIX: faltava resetar o formulário e abrir o modal para este item.
+    // Sem essas linhas, o Pix era copiado mas nada aparecia na tela.
+    setErroEnvio(null)
+    setEnviadoComSucesso(false)
+    setNomePessoa('')
+    setTextoMensagem('')
+    setItemSelecionado(item)
   }
 
   return (
@@ -123,7 +174,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         color: cores.texto,
       }}
     >
-      {/* CSS local do Next.js — não depende do Tailwind, sempre funciona */}
       <style jsx global>{`
         @keyframes giftSlide {
           from { background-position: 0 0; }
@@ -154,6 +204,16 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         .gift-button:hover:not(:disabled) {
           background-color: #5d6e47;
         }
+        .gift-input {
+          transition: border-color 0.2s ease;
+        }
+        .gift-input:focus {
+          outline: none;
+          border-color: #6d7f55 !important;
+        }
+        .gift-close-btn:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
       `}</style>
 
       <div
@@ -168,7 +228,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         }}
       />
 
-      {/* HERO */}
       <section
         style={{
           maxWidth: '56rem',
@@ -183,19 +242,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
           transition={{ duration: 1, ease: 'easeOut' }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
-          {/* <div
-            style={{
-              marginBottom: '1.5rem',
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: 'clamp(2.25rem, 5vw, 3rem)',
-              fontStyle: 'italic',
-              letterSpacing: '0.05em',
-              color: cores.gold,
-            }}
-          >
-            J &amp; C
-          </div> */}
-
           <div
             style={{
               marginBottom: '1rem',
@@ -250,7 +296,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         </motion.div>
       </section>
 
-      {/* BARRA DE PROGRESSO */}
       <section style={{ maxWidth: '48rem', margin: '0 auto', padding: '3rem 1.5rem' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -365,7 +410,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         </div>
       ) : null}
 
-      {/* GRID DE PRESENTES */}
       <section style={{ maxWidth: '72rem', margin: '0 auto', padding: '3rem 1.5rem 6rem' }}>
         <motion.div
           variants={containerVariants}
@@ -532,7 +576,9 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
                   <div style={{ marginTop: 'auto', width: '100%' }}>
                     <button
                       type="button"
-                      onClick={() => handlePresentear(item)}
+                      onClick={() => {
+                        handlePresentear(item)
+                      }}
                       disabled={botaoDesabilitado}
                       className="gift-button"
                       style={{
@@ -565,7 +611,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         </motion.div>
       </section>
 
-      {/* FOOTER */}
       <footer
         style={{
           borderTop: `1px solid ${cores.borda}66`,
@@ -582,8 +627,277 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
           className="transition duration-700 scale-[0.6]"
           priority
         />
-
       </footer>
+
+      <AnimatePresence>
+        {itemSelecionado ? (
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={fecharModal}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 50,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1.5rem',
+              backgroundColor: 'rgba(51, 45, 41, 0.45)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
+          >
+            <motion.div
+              key="modal"
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.97 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '30rem',
+                borderRadius: '1rem',
+                border: `1px solid ${cores.borda}80`,
+                backgroundColor: cores.cardBg,
+                padding: '2.5rem 2rem 2rem',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.2)',
+                textAlign: 'center',
+              }}
+            >
+              <button
+                type="button"
+                onClick={fecharModal}
+                className="gift-close-btn"
+                aria-label="Fechar"
+                style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '2rem',
+                  height: '2rem',
+                  borderRadius: '9999px',
+                  border: 'none',
+                  backgroundColor: 'transparent',
+                  color: cores.muted,
+                  cursor: 'pointer',
+                  transition: 'background-color 0.2s ease',
+                }}
+              >
+                <X size={18} />
+              </button>
+
+              {enviadoComSucesso ? (
+                <>
+                  <div
+                    style={{
+                      marginBottom: '1rem',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      color: cores.verde,
+                    }}
+                  >
+                    <Leaf size={32} strokeWidth={1.5} />
+                  </div>
+                  <h3
+                    style={{
+                      marginBottom: '0.75rem',
+                      fontFamily: 'var(--font-cormorant)',
+                      fontSize: '1.75rem',
+                      color: cores.texto,
+                    }}
+                  >
+                    Muito obrigado, {nomePessoa.split(' ')[0]}!
+                  </h3>
+                  <p
+                    style={{
+                      marginBottom: '1.5rem',
+                      fontSize: '0.9rem',
+                      lineHeight: 1.6,
+                      color: cores.muted,
+                    }}
+                  >
+                    O código Pix já está copiado. É só colar no seu app do banco para finalizar o presente de{' '}
+                    <strong style={{ color: cores.texto }}>{itemSelecionado.nome}</strong>.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={fecharModal}
+                    className="gift-button"
+                    style={{
+                      width: '100%',
+                      borderRadius: '0.375rem',
+                      border: 'none',
+                      padding: '0.75rem 1.5rem',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.15em',
+                      color: cores.botaoTexto,
+                      backgroundColor: cores.verde,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Fechar
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      marginBottom: '0.5rem',
+                      fontFamily: 'var(--font-cormorant)',
+                      fontSize: '1.75rem',
+                      fontStyle: 'italic',
+                      color: cores.gold,
+                    }}
+                  >
+                    J &amp; C
+                  </div>
+
+                  <h3
+                    style={{
+                      marginBottom: '0.5rem',
+                      fontFamily: 'var(--font-cormorant)',
+                      fontSize: '1.875rem',
+                      color: cores.texto,
+                    }}
+                  >
+                    Deixe uma mensagem
+                  </h3>
+
+                  <p
+                    style={{
+                      marginBottom: '1.75rem',
+                      fontSize: '0.9rem',
+                      lineHeight: 1.6,
+                      color: cores.muted,
+                    }}
+                  >
+                    Você está presenteando{' '}
+                    <strong style={{ color: cores.texto }}>{itemSelecionado.nome}</strong>. O código Pix já
+                    foi copiado — antes de colar no seu banco, conte pra gente quem está presenteando!
+                  </p>
+
+                  <div style={{ marginBottom: '1rem', textAlign: 'left' }}>
+                    <label
+                      htmlFor="nomePessoa"
+                      style={{
+                        display: 'block',
+                        marginBottom: '0.4rem',
+                        fontSize: '0.75rem',
+                        fontWeight: 500,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                        color: cores.texto,
+                      }}
+                    >
+                      Seu nome
+                    </label>
+                    <input
+                      id="nomePessoa"
+                      type="text"
+                      value={nomePessoa}
+                      onChange={(e) => setNomePessoa(e.target.value)}
+                      placeholder="Como devemos te chamar?"
+                      className="gift-input"
+                      style={{
+                        width: '100%',
+                        borderRadius: '0.5rem',
+                        border: `1px solid ${cores.borda}`,
+                        backgroundColor: cores.fundo,
+                        padding: '0.65rem 0.9rem',
+                        fontSize: '0.9rem',
+                        color: cores.texto,
+                        fontFamily: 'var(--font-montserrat)',
+                      }}
+                    />
+                  </div>
+
+                  <div style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
+                    <label
+                      htmlFor="textoMensagem"
+                      style={{
+                        display: 'block',
+                        marginBottom: '0.4rem',
+                        fontSize: '0.75rem',
+                        fontWeight: 500,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                        color: cores.texto,
+                      }}
+                    >
+                      Mensagem para o casal (opcional)
+                    </label>
+                    <textarea
+                      id="textoMensagem"
+                      value={textoMensagem}
+                      onChange={(e) => setTextoMensagem(e.target.value)}
+                      placeholder="Escreva um recadinho carinhoso..."
+                      rows={3}
+                      className="gift-input"
+                      style={{
+                        width: '100%',
+                        resize: 'none',
+                        borderRadius: '0.5rem',
+                        border: `1px solid ${cores.borda}`,
+                        backgroundColor: cores.fundo,
+                        padding: '0.65rem 0.9rem',
+                        fontSize: '0.9rem',
+                        color: cores.texto,
+                        fontFamily: 'var(--font-montserrat)',
+                      }}
+                    />
+                  </div>
+
+                  {erroEnvio ? (
+                    <p
+                      style={{
+                        marginBottom: '1rem',
+                        fontSize: '0.8rem',
+                        color: '#b91c1c',
+                      }}
+                    >
+                      {erroEnvio}
+                    </p>
+                  ) : null}
+
+                  <button
+                    type="button"
+                    onClick={enviarMensagem}
+                    disabled={enviando}
+                    className="gift-button"
+                    style={{
+                      width: '100%',
+                      borderRadius: '0.375rem',
+                      border: 'none',
+                      padding: '0.75rem 1.5rem',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.15em',
+                      color: cores.botaoTexto,
+                      backgroundColor: enviando ? cores.botaoDesabilitado : cores.verde,
+                      cursor: enviando ? 'not-allowed' : 'pointer',
+                      transition: 'background-color 0.2s ease',
+                    }}
+                  >
+                    {enviando ? 'Enviando...' : 'Enviar mensagem'}
+                  </button>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   )
 }
