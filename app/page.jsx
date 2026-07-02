@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const links = {
@@ -147,14 +148,16 @@ export default function Home() {
             />
           </a>
 
-          <Image
-            src={imagens.presentes}
-            alt="Você é  nosso convidado:Jéssica e Caio Augusto"
-            width={1120}
-            height={1456}
-            priority
-            className="open-envelope paper-shadow absolute top-[270%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] left-[40%]"
-          />
+          <Link href="/presentes">
+            <Image
+              src={imagens.presentes}
+              alt="Você é  nosso convidado:Jéssica e Caio Augusto"
+              width={1120}
+              height={1456}
+              priority
+              className="open-envelope paper-shadow absolute top-[270%] w-[68%] max-w-[430px] sm:top-[4%] scale-[1.1] left-[40%]"
+            />
+          </Link>
 
           <a
             href={whatsappLink}
@@ -196,101 +199,6 @@ export default function Home() {
       </section>
 
             )}
-
-
-      {/* {aberto && (
-        <div>
-          <section
-        id="programacao"
-        className="relative mx-auto grid min-h-screen w-full max-w-6xl place-items-center px-5 py-24"
-      >
-        <div className="reveal text-center">
-          <p className="text-lg uppercase tracking-[0.36em] text-[#7b7350]">
-            Nossa programação
-          </p>
-
-          <h2 className="mt-4 font-[var(--font-script)] text-6xl text-[#344019] sm:text-8xl">
-            15 de agosto
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-3xl leading-tight text-[#536039] sm:text-5xl">
-            Esperamos você às 16:30h na Aldeia do Lago, em Ji-Paraná.
-          </p>
-
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={links.confirmarPresenca}
-              target="_blank"
-              className="rounded-full bg-[#39431d] px-8 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[#fff7df] transition hover:-translate-y-1 hover:bg-[#28300f]"
-            >
-              Confirmar presença
-            </a>
-
-            <a
-              href={links.mapa}
-              target="_blank"
-              className="rounded-full border border-[#a58d52] px-8 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[#39431d] transition hover:-translate-y-1 hover:bg-white/40"
-            >
-              Abrir localização
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <ConviteLink
-        id="presentes"
-        titulo="Lista de presentes"
-        texto="Um espaço para direcionar seus convidados para a lista de presentes ou para uma chave Pix, caso prefiram presentear dessa forma."
-        imagem={imagens.presentes}
-        href={links.listaPresentes}
-        lado="esquerda"
-      />
-
-      <section
-        id="local"
-        className="relative mx-auto grid min-h-screen w-full max-w-6xl items-center gap-8 px-5 py-24 lg:grid-cols-[1.05fr_0.95fr]"
-      >
-        <div className="reveal order-2 lg:order-1">
-          <p className="text-lg uppercase tracking-[0.34em] text-[#7b7350]">
-            Local e hospedagem
-          </p>
-
-          <h2 className="mt-4 font-[var(--font-script)] text-6xl leading-none text-[#344019] sm:text-8xl">
-            Ji-Paraná
-          </h2>
-
-          <p className="mt-5 max-w-xl text-2xl leading-snug text-[#536039] sm:text-3xl">
-            Reunimos orientações sobre o local da cerimônia e sugestões de
-            hospedagem para quem vem celebrar esse dia conosco.
-          </p>
-
-          <a
-            href={links.local}
-            className="mt-8 inline-flex rounded-full bg-[#39431d] px-8 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[#fff7df] transition hover:-translate-y-1 hover:bg-[#28300f]"
-          >
-            Ver informações
-          </a>
-        </div>
-
-        <div className="reveal relative order-1 grid place-items-center lg:order-2">
-          <Image
-            src={imagens.local}
-            alt="Informações sobre local da cerimônia e hospedagem"
-            width={1120}
-            height={1456}
-            className="floating paper-shadow w-full max-w-[570px]"
-            style={{ "--rotate": "2deg" }}
-          />
-        </div>
-      </section>
-
-      <footer className="px-5 pb-12 text-center text-lg tracking-[0.18em] text-[#6c6d4d]">
-        Com carinho, Jéssica & Caio Augusto
-      </footer>
-        </div>
-      )} */}
-
-
 
     </main>
   );
