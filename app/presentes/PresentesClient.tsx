@@ -168,6 +168,15 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         }}
       />
 
+   <Image
+    src="/convite/monograma2.webp"
+    alt="Monograma"
+    width={2000}
+    height={100}
+    className="absolute left-1/2 z-20 w-[520px] -translate-x-1/2 object-contain transition duration-700 scale-[0.5]"
+    priority
+  />
+
       {/* HERO */}
       <section
         style={{
@@ -177,15 +186,19 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
           textAlign: 'center',
         }}
       >
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
+
+
+
           <div
             style={{
-              marginBottom: '1.5rem',
+              marginBottom: '7rem',
               fontFamily: 'var(--font-cormorant)',
               fontSize: 'clamp(2.25rem, 5vw, 3rem)',
               fontStyle: 'italic',
@@ -193,7 +206,7 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
               color: cores.gold,
             }}
           >
-            J &amp; C
+            
           </div>
 
           <div
@@ -570,56 +583,19 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         style={{
           borderTop: `1px solid ${cores.borda}66`,
           backgroundColor: `${cores.cardBg}4d`,
-          padding: '4rem 1.5rem',
+          padding: '1rem 1.5rem',
           textAlign: 'center',
         }}
       >
-        <div
-          style={{
-            margin: '0 auto',
-            display: 'flex',
-            maxWidth: '42rem',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <div
-            style={{
-              marginBottom: '1.5rem',
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: '1.875rem',
-              fontStyle: 'italic',
-              color: cores.gold,
-            }}
-          >
-            J &amp; C
-          </div>
+        <Image
+          src="/convite/monograma2.webp"
+          alt="Envelope fechado do convite"
+          width={2000}
+          height={100}
+          className="transition duration-700 scale-[0.6]"
+          priority
+        />
 
-          <p
-            style={{
-              marginBottom: '1.5rem',
-              fontFamily: 'var(--font-cormorant)',
-              fontSize: '1.25rem',
-              fontWeight: 300,
-              fontStyle: 'italic',
-              color: cores.texto,
-            }}
-          >
-            &quot;Para sempre é o tempo que escolhemos amar.&quot;
-          </p>
-
-          <div
-            style={{
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              textTransform: 'uppercase',
-              letterSpacing: '0.3em',
-              color: cores.muted,
-            }}
-          >
-            15 . 08 . 2026
-          </div>
-        </div>
       </footer>
     </div>
   )

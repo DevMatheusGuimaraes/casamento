@@ -2,7 +2,7 @@ export const PRESENTES_FIXOS = [
   {
     id: 1,
     nome: 'Geladeira',
-    imagem: '/presentes/geladeira.png',
+    imagem: '/presentes/geladeira.webp',
     totalCotas: 12,
     valorCota: 0,
     quantidadeInicial: 0,
@@ -10,19 +10,61 @@ export const PRESENTES_FIXOS = [
   {
     id: 2,
     nome: 'Micro-ondas',
-    imagem: '/presentes/microondas.png',
+    imagem: '/presentes/microondas.webp',
     totalCotas: 3,
   },
   {
     id: 3,
     nome: 'Forno elétrico',
-    imagem: '/presentes/forno-eletrico.png',
+    imagem: '/presentes/forno-eletrico.webp',
     totalCotas: 9,
   },
   {
     id: 4,
     nome: 'Lava-louças',
-    imagem: '/presentes/lava-loucas.png',
+    imagem: '/presentes/lava-loucas.webp',
     totalCotas: 10,
+  },
+  {
+    id: 5,
+    nome: 'Air Fryer',
+    imagem: '/presentes/air-fryer.webp',
+    totalCotas: 2,
+  },
+  {
+    id: 6,
+    nome: 'Cooktop',
+    imagem: '/presentes/cooktop.webp',
+    totalCotas: 3,
+  },
+  {
+    id: 7,
+    nome: 'CookCafeteira Expresso',
+    imagem: '/presentes/cafeteira.webp',
+    totalCotas: 1,
+  },
+  {
+    id: 8,
+    nome: 'Sofa',
+    imagem: '/presentes/sofa.webp',
+    totalCotas: 10,
+  },
+  {
+    id: 9,
+    nome: 'Tv',
+    imagem: '/presentes/tv.webp',
+    totalCotas: 12,
+  },
+  {
+    id: 10,
+    nome: 'Máquina de Lavar',
+    imagem: '/presentes/maquina.webp',
+    totalCotas: 6,
+  },
+  {
+    id: 11,
+    nome: 'Decoração',
+    imagem: '/presentes/decoracao.webp',
+    totalCotas: 99,
   },
 ]

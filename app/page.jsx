@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { brittany } from "./fonts";
 
 const links = {
   confirmarPresenca:
@@ -16,7 +17,7 @@ const links = {
 const imagens = {
   carta: "/convite/carta.webp",
   aberto: "/convite/cartao-aberto.webp",
-  convidado: "/convite/convidado.webp",
+  convidado: "/convite/convidado2.webp",
   detalhes: "/convite/confirmar.webp",
   presentes: "/convite/presentes.webp",
   local: "/convite/local-casa.webp",
@@ -28,6 +29,7 @@ const whatsappText = encodeURIComponent(
 );
 
 const whatsappLink = `https://wa.me/5569993906707?text=${whatsappText}`;
+
 
 export default function Home() {
   const [aberto, setAberto] = useState(false);
@@ -54,27 +56,41 @@ export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden">
 
-      <section className={`${aberto ? "hidden" : ""} relative grid min-h-screen place-items-center px-5 py-10`}>
+      <section className={`${aberto ? "hidden" : ""} grid min-h-screen place-items-center px-5 py-10`}>
 
-        <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
           {!aberto && (
-            <div>
-              <p className="fade-up mb-5 text-center text-sm uppercase tracking-[0.34em] text-[#646b45] sm:text-xl">
-              O CONVIDAMOS COM A BÊNÇÃO DE NOSSOS PAIS
-            </p>
 
-            <h1 className="fade-up text-center font-[var(--font-script)] text-5xl leading-none text-[#334019] sm:text-8xl md:text-9xl">
-              Jéssica & Caio Augusto
-            </h1>
+            <div className="flex w-full flex-col items-center justify-center text-center">
+              <Image
+                src="/convite/monograma2.webp"
+                alt="Monograma"
+                width={2000}
+                height={100}
+                className="mx-auto mb-[30px] h-auto w-[200px] max-w-[90vw] object-contain"
+                priority
+              />
+
+              <div className="flex flex-col items-center justify-center gap-5">
+                <h1
+                  className={`${brittany.className} fade-up text-center text-5xl leading-none text-[#334019] sm:text-6xl md:text-5xl mb-4`}
+                >
+                  Jéssica & Caio Augusto
+                </h1>
+
+                <p className="fade-up text-center text-sm uppercase tracking-[0.34em] text-[#646b45] sm:text-xl">
+                  15 | 08 | 2026
+                </p>
+              </div>
             </div>
           )}
 
-          <div className="relative grid min-h-[390px] w-full place-items-center sm:min-h-[560px]">
+          <div className="relative grid min-h-[360px] w-full place-items-center sm:min-h-[460px]">
             {!aberto && (
               <button
                 type="button"
                 onClick={() => setAberto(true)}
-                className="group relative w-full max-w-[720px] cursor-pointer border-0 bg-transparent p-0"
+                className="group relative w-full max-w-[400px] cursor-pointer border-0 bg-transparent p-0"
                 aria-label="Abrir convite"
               >
                 <Image
@@ -82,12 +98,12 @@ export default function Home() {
                   alt="Envelope fechado do convite"
                   width={1300}
                   height={1264}
-                  className="transition duration-700 scale-[1.13]"
+                  className="transition duration-700 scale-[1.13] "
                   priority
                 />
 
                 <span className="shine absolute top-[48%] -translate-x-1/2 px-7 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#39431d] shadow-black/10 backdrop-blur-sm transition sm:text-lg">
-                  CLIQUE PARA ABRIR
+                  CLIQUE NO SELO PARA ABRIR
                 </span>
               </button>
             )}
@@ -105,7 +121,7 @@ export default function Home() {
             alt="Envelope aberto do convite"
             width={1264}
             height={1264}
-            className="open-envelope paper-shadow w-full max-w-[780px]"
+            className="open-envelope paper-shadow w-full max-w-[460px]"
             priority
           />
 
