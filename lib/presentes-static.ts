@@ -4,6 +4,8 @@ export const PRESENTES_FIXOS = [
     nome: 'Geladeira',
     imagem: '/presentes/geladeira.png',
     totalCotas: 12,
+    valorCota: 0,
+    quantidadeInicial: 0,
   },
   {
     id: 2,
