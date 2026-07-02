@@ -168,15 +168,6 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
         }}
       />
 
-   <Image
-    src="/convite/monograma2.webp"
-    alt="Monograma"
-    width={2000}
-    height={100}
-    className="absolute left-1/2 z-20 w-[520px] -translate-x-1/2 object-contain transition duration-700 scale-[0.5]"
-    priority
-  />
-
       {/* HERO */}
       <section
         style={{
@@ -186,19 +177,15 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
           textAlign: 'center',
         }}
       >
-
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
-
-
-
-          <div
+          {/* <div
             style={{
-              marginBottom: '7rem',
+              marginBottom: '1.5rem',
               fontFamily: 'var(--font-cormorant)',
               fontSize: 'clamp(2.25rem, 5vw, 3rem)',
               fontStyle: 'italic',
@@ -206,8 +193,8 @@ export function PresentesClient({ presentes, erroSupabase }: Props) {
               color: cores.gold,
             }}
           >
-            
-          </div>
+            J &amp; C
+          </div> */}
 
           <div
             style={{
